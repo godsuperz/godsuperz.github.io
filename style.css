@@ -1,0 +1,560 @@
+/* CSS Variables - Pink Romantic Theme */
+:root {
+  --pink-primary: #FF6B9D;
+  --pink-secondary: #C44569;
+  --rose-gold: #B76E79;
+  --light-pink: #FFE4EC;
+  --bg-dark: #2D1B33;
+  --bg-light: #4A1942;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-light) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* Page Transitions */
+.page {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.page.hidden {
+  display: none !important;
+}
+
+.page.active,
+.page.show {
+  display: flex;
+}
+
+/* Opening Page Styles */
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, var(--pink-primary), var(--rose-gold), var(--light-pink), var(--pink-primary));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--light-pink);
+  margin-top: 1rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  margin-top: 1rem;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+/* Enhanced Button Styles */
+.btn {
+  margin-top: 2rem;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--pink-primary), var(--pink-secondary));
+  color: white;
+  cursor: pointer;
+  box-shadow:
+    0 4px 15px rgba(255, 107, 157, 0.4),
+    0 0 30px rgba(255, 107, 157, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.btn:hover::before {
+  transform: translateX(100%);
+}
+
+.btn:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow:
+    0 8px 25px rgba(255, 107, 157, 0.5),
+    0 0 50px rgba(255, 107, 157, 0.3);
+}
+
+.btn:active {
+  transform: scale(0.98) translateY(0);
+}
+
+/* Card Flipping Styles */
+.cards-container {
+  display: flex;
+  gap: 1.5rem;
+  perspective: 1000px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Enhanced Card Flipping Styles */
+.card {
+  width: 140px;
+  height: 180px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+  position: relative;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.35));
+}
+
+.card:hover:not(.flipped) {
+  transform: translateY(-12px) scale(1.05);
+  filter: drop-shadow(0 20px 35px rgba(255, 107, 157, 0.45));
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3.5rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.card-front {
+  background: linear-gradient(135deg, #FF6B9D 0%, #FF8FAB 50%, #FFB6C1 100%);
+  box-shadow:
+    0 8px 25px rgba(255, 107, 157, 0.5),
+    inset 0 0 30px rgba(255, 255, 255, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.card-front::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+}
+
+.card-back {
+  background: linear-gradient(135deg, #2D1B33 0%, #4A1942 30%, #6B3A5D 70%, #8B4A6B 100%);
+  transform: rotateY(180deg);
+  box-shadow:
+    0 8px 25px rgba(139, 74, 107, 0.6),
+    inset 0 0 30px rgba(255, 215, 0, 0.15),
+    0 0 20px rgba(255, 215, 0, 0.2);
+  border: 3px solid rgba(255, 215, 0, 0.5);
+}
+
+.card-back::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 12px;
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 215, 0, 0.1) 50%, transparent 60%);
+}
+
+/* 翻转后卡片的发光效果 */
+.card.flipped .card-back {
+  animation: cardGlow 1.5s ease-out;
+}
+
+@keyframes cardGlow {
+  0% { box-shadow: 0 8px 25px rgba(139, 74, 107, 0.6), inset 0 0 30px rgba(255, 215, 0, 0.15), 0 0 0px rgba(255, 215, 0, 0); }
+  50% { box-shadow: 0 8px 25px rgba(139, 74, 107, 0.6), inset 0 0 30px rgba(255, 215, 0, 0.15), 0 0 40px rgba(255, 215, 0, 0.6); }
+  100% { box-shadow: 0 8px 25px rgba(139, 74, 107, 0.6), inset 0 0 30px rgba(255, 215, 0, 0.15), 0 0 15px rgba(255, 215, 0, 0.3); }
+}
+
+/* Slot Machine Styles */
+.slot-machine {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border-radius: 20px;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Enhanced Slot Machine Styles */
+.slot-machine {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border-radius: 20px;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.reel {
+  width: 100px;
+  height: 120px;
+  background: linear-gradient(180deg, #0a0a15 0%, #12121f 50%, #0a0a15 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid var(--rose-gold);
+  box-shadow:
+    inset 0 0 25px rgba(0, 0, 0, 0.6),
+    0 0 25px rgba(255, 107, 157, 0.25);
+}
+
+.reel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35px;
+  background: linear-gradient(to bottom, rgba(255, 107, 157, 0.35), transparent);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.reel::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35px;
+  background: linear-gradient(to top, rgba(255, 107, 157, 0.35), transparent);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.reel-symbol {
+  font-size: 3rem;
+  position: absolute;
+  transition: transform 0.1s ease;
+}
+
+.btn-spin {
+  margin-top: 2rem;
+  padding: 1rem 4rem;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--pink-primary), var(--pink-secondary));
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255, 107, 157, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-spin:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(255, 107, 157, 0.7);
+}
+
+.btn-spin.spinning {
+  animation: pulse 0.5s ease infinite;
+}
+
+.btn-spin:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  animation: none;
+}
+
+/* Enhanced Gift Reveal Page Styles */
+.gift-reveal {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.gift-label {
+  font-size: 1.8rem;
+  color: var(--light-pink);
+  margin-bottom: 1rem;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+  letter-spacing: 0.2em;
+}
+
+.gift-name {
+  font-size: 4.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #FFD700, #FFA500, #FF6B6B, #FF85A0, #FFD700);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2s linear infinite, giftRise 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
+  margin: 1.5rem 0;
+}
+
+.gift-message {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.95);
+  margin-top: 1.5rem;
+  max-width: 420px;
+  line-height: 1.8;
+  animation: fadeInUp 0.6s ease-out 0.5s both;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.gift-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle,
+    rgba(255, 215, 0, 0.35) 0%,
+    rgba(255, 107, 157, 0.2) 40%,
+    transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: glowPulse 1.5s ease-in-out infinite, haloSpin 10s linear infinite;
+}
+
+.gift-glow::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  right: -30px;
+  bottom: -30px;
+  border: 2px solid rgba(255, 215, 0, 0.25);
+  border-radius: 50%;
+  animation: glowPulse 1s ease-in-out infinite reverse;
+}
+
+.gift-glow::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  right: -60px;
+  bottom: -60px;
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 50%;
+  animation: haloSpin 15s linear infinite reverse;
+}
+
+/* Animation Keyframes */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(255, 107, 157, 0.5);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 30px rgba(255, 107, 157, 0.8);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes burstRing {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(20);
+    opacity: 0;
+  }
+}
+
+@keyframes rayFade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .card {
+    width: 100px;
+    height: 130px;
+  }
+
+  .reel {
+    width: 70px;
+    height: 90px;
+  }
+
+  .gift-name {
+    font-size: 2rem;
+  }
+}
+
+/* New Enhanced Animation Keyframes */
+@keyframes giftRise {
+  0% {
+    transform: translateY(80px) scale(0.3);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  40% {
+    filter: blur(3px);
+  }
+  60% {
+    transform: translateY(-15px) scale(1.08);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(5px) scale(0.98);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes haloSpin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 60px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 107, 157, 0.4);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    transform: scale(1);
+  }
+}
+
+@keyframes cardHover {
+  0% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+  50% { box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5), 0 0 30px rgba(255, 107, 157, 0.3); }
+  100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+}
