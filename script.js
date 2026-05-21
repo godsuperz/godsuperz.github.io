@@ -23,8 +23,16 @@ document.getElementById('btn-start').textContent = '开始抽取礼物';
 
 // 初始化翻牌页
 document.querySelector('#page-cards .page-title').textContent = '选择一张卡片';
-document.querySelectorAll('.card-front').forEach(el => el.textContent = '💌');
-document.querySelectorAll('.card-back').forEach(el => el.textContent = '?');
+// 每张卡片正面显示不同的符号
+var cardFrontSymbols = ['💖', '💝', '💕'];
+document.querySelectorAll('.card-front').forEach(function(el, index) {
+    el.textContent = cardFrontSymbols[index] || '💌';
+});
+// 每张卡片的背面显示不同的神秘符号
+var cardBackSymbols = ['🌟', '✨', '💫'];
+document.querySelectorAll('.card-back').forEach(function(el, index) {
+    el.textContent = cardBackSymbols[index] || '?';
+});
 
 // 初始化老虎机页
 document.querySelector('#page-slot .page-title').textContent = '抽奖时间~';
@@ -80,22 +88,24 @@ document.getElementById('btn-start').addEventListener('click', function() {
 });
 
 // ========== 翻牌逻辑 ==========
-document.querySelectorAll('.card').forEach(card => {
+document.querySelectorAll('.card').forEach(function(card) {
     card.addEventListener('click', function() {
         if (this.classList.contains('flipped') || !canFlip) {
             return;
         }
         this.classList.add('flipped');
         flippedCards++;
-        createParticles(20);
 
-        if (flippedCards >= TOTAL_CARDS) {
-            canFlip = false;
-            setTimeout(function() {
-                showPage('page-slot');
-                initSlotMachine();
-            }, 800);
-        }
+        // 翻牌时触发更多粒子效果
+        createParticles(30, 1.2);
+        triggerFlash(0.3);
+
+        // 每张牌翻过后都可以进入老虎机抽奖环节
+        canFlip = false;
+        setTimeout(function() {
+            showPage('page-slot');
+            initSlotMachine();
+        }, 600);
     });
 });
 
@@ -156,6 +166,7 @@ function stopSpinning(giftWeight) {
     isSpinning = false;
     var spinBtn = document.getElementById('btn-spin');
     spinBtn.classList.remove('spinning');
+    spinBtn.disabled = true; // 保持禁用，直到显示结果
 
     slotIntervals.forEach(function(interval) {
         clearInterval(interval);
@@ -206,6 +217,10 @@ function revealGift(giftWeight) {
 
     setTimeout(function() {
         showPage('page-result');
+        // 重置按钮状态
+        var spinBtn = document.getElementById('btn-spin');
+        spinBtn.textContent = '点击抽奖';
+        spinBtn.disabled = false;
     }, 300);
 }
 
