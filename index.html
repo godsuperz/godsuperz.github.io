@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>520 Love - 专属礼物抽奖</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 开场页 -->
+    <div id="page-start" class="page active">
+      <h1 class="title"></h1>
+      <p class="subtitle"></p>
+      <p class="description"></p>
+      <button id="btn-start" class="btn"></button>
+    </div>
+
+    <!-- 翻牌环节 -->
+    <div id="page-cards" class="page hidden">
+      <h2 class="page-title"></h2>
+      <div class="cards-container">
+        <div class="card" data-index="0">
+          <div class="card-inner">
+            <div class="card-front"></div>
+            <div class="card-back"></div>
+          </div>
+        </div>
+        <div class="card" data-index="1">
+          <div class="card-inner">
+            <div class="card-front"></div>
+            <div class="card-back"></div>
+          </div>
+        </div>
+        <div class="card" data-index="2">
+          <div class="card-inner">
+            <div class="card-front"></div>
+            <div class="card-back"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 老虎机环节 -->
+    <div id="page-slot" class="page hidden">
+      <h2 class="page-title"></h2>
+      <div class="slot-machine">
+        <div id="reel-0" class="reel"></div>
+        <div id="reel-1" class="reel"></div>
+        <div id="reel-2" class="reel"></div>
+      </div>
+      <button id="btn-spin" class="btn"></button>
+    </div>
+
+    <!-- 礼物揭晓页 -->
+    <div id="page-result" class="page hidden">
+      <div class="gift-reveal">
+        <div class="gift-glow"></div>
+        <p class="gift-label"></p>
+        <h2 id="gift-name" class="gift-name"></h2>
+        <p id="gift-message" class="gift-message"></p>
+        <button id="btn-replay" class="btn"></button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="particles"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
