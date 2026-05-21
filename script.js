@@ -14,9 +14,10 @@ let slotIntervals = [];
 let flippedCards = 0;
 const TOTAL_CARDS = 3;
 let canFlip = true;
+let isFirstDraw = true; // 标记是否是本次游戏第一次抽奖
 
 // ========== 初始化开场页文字 ==========
-document.querySelector('.title').textContent = '💕 520 Love 💕';
+document.querySelector('.title').textContent = '💕 521 Love 💕';
 document.querySelector('.subtitle').textContent = '亲爱的，节日快乐！';
 document.querySelector('.description').textContent = '选择一张卡片，开启你的专属礼物~';
 document.getElementById('btn-start').textContent = '开始抽取礼物';
@@ -24,12 +25,12 @@ document.getElementById('btn-start').textContent = '开始抽取礼物';
 // 初始化翻牌页
 document.querySelector('#page-cards .page-title').textContent = '选择一张卡片';
 // 每张卡片正面显示不同的符号
-var cardFrontSymbols = ['💖', '💝', '💕'];
+var cardFrontSymbols = ['💖高', '💝美', '💕美'];
 document.querySelectorAll('.card-front').forEach(function(el, index) {
     el.textContent = cardFrontSymbols[index] || '💌';
 });
 // 每张卡片的背面显示不同的神秘符号
-var cardBackSymbols = ['🌟', '✨', '💫'];
+var cardBackSymbols = ['高', '美', '美'];
 document.querySelectorAll('.card-back').forEach(function(el, index) {
     el.textContent = cardBackSymbols[index] || '?';
 });
@@ -68,6 +69,12 @@ function getEffectIntensity(giftWeight) {
 }
 
 function selectRandomGift() {
+    // 如果是本次游戏第一次抽奖，直接返回"任选礼物"
+    if (isFirstDraw) {
+        isFirstDraw = false;
+        return gifts.find(function(g) { return g.name === '任选礼物'; });
+    }
+
     // 根据权重随机选择
     var totalWeight = gifts.reduce(function(sum, g) { return sum + g.weight; }, 0);
     var random = Math.random() * totalWeight;
@@ -105,7 +112,7 @@ document.querySelectorAll('.card').forEach(function(card) {
         setTimeout(function() {
             showPage('page-slot');
             initSlotMachine();
-        }, 600);
+        }, 2000);
     });
 });
 
@@ -231,6 +238,7 @@ document.getElementById('btn-replay').addEventListener('click', function() {
     });
     flippedCards = 0;
     canFlip = true;
+    isFirstDraw = true; // 重置第一次抽奖标记
     createParticles(30);
     showPage('page-cards');
 });
